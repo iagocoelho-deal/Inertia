@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/menu"
+    android:background="#6D000000"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="20sp"
+        tools:context=".Menu">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="InertiaAPP"
+                    android:layout_marginStart="25sp"
+                    android:textColor="@color/white"
+                    android:textSize="25sp"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_gravity="end"
+                android:padding="10sp"
+                android:onClick="handleAcessLocker">
+
+                <LinearLayout
+                    android:layout_width="100sp"
+                    android:layout_height="120sp"
+                    android:background="@drawable/rounded_corner_small"
+                    android:src="@drawable/ic_launcher_background"
+                    android:padding="15sp"
+                    android:layout_margin="15sp"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    >
+
+                    <ImageView
+                        android:layout_height="25dp"
+                        android:layout_width="25sp"
+                        android:layout_marginTop="15dp"
+                        android:src="@drawable/ic_locker"
+                        android:contentDescription="Icone Lockers"
+                        android:id="@+id/iconLocker"
+                    />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="bottom"
+                        android:text="Lockers"
+                        android:textColor="@color/white"
+                        android:textSize="20sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="100sp"
+                    android:layout_height="120sp"
+                    android:background="@drawable/rounded_corner_small"
+                    android:src="@drawable/ic_launcher_background"
+                    android:padding="10sp"
+                    android:layout_gravity="center"
+                    android:layout_margin="15sp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_height="25dp"
+                        android:layout_width="25sp"
+                        android:layout_marginTop="15dp"
+                        android:contentDescription="Icone Estadias"
+                        android:id="@+id/iconEstadia"
+                        android:src="@drawable/ic_home"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="bottom"
+                        android:text="Estadias"
+                        android:textColor="@color/white"
+                        android:textSize="20sp"/>
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_gravity="end"
+
+                android:padding="10sp">
+
+                <LinearLayout
+                    android:layout_width="100sp"
+                    android:layout_height="120sp"
+                    android:background="@drawable/rounded_corner_small"
+                    android:src="@drawable/ic_launcher_background"
+                    android:padding="10sp"
+                    android:layout_gravity="center"
+                    android:layout_margin="15sp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_height="25dp"
+                        android:layout_width="25sp"
+                        android:layout_marginTop="15dp"
+                        android:contentDescription="Icone Lojas"
+                        android:id="@+id/iconLojas"
+                        android:src="@drawable/ic_store"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="bottom"
+                        android:text="Lojas"
+                        android:textColor="@color/white"
+                        android:textSize="20sp"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="100sp"
+                    android:layout_height="120sp"
+                    android:background="@drawable/rounded_corner_small"
+                    android:src="@drawable/ic_launcher_background"
+                    android:padding="10sp"
+                    android:layout_gravity="center"
+                    android:layout_margin="15sp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_height="25dp"
+                        android:layout_width="25sp"
+                        android:layout_marginTop="15dp"
+                        android:contentDescription="Icone Transporte"
+                        android:id="@+id/iconTransporte"
+                        android:src="@drawable/ic_bike"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="bottom"
+                        android:text="Transporte"
+                        android:textColor="@color/white"
+                        android:textSize="20sp"/>
+                </LinearLayout>
+
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>
