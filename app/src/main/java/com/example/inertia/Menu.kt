@@ -21,7 +21,7 @@ class Menu : AppCompatActivity() {
     }
 
     fun handleAcessLocker(view: View) {
-        val intent = Intent(this, LockerActivity::class.java)
+        val intent = Intent(this, MapLockerActivity::class.java)
         startActivity(intent)
     }
 }
