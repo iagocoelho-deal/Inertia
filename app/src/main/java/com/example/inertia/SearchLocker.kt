@@ -46,7 +46,7 @@ class SearchLocker : AppCompatActivity() {
         layoutPrincipal.addView(componenteLocker)
     }
 
-    fun teste(view: View) {
+    fun acessarEnderecoNoMapa(view: View) {
 
         val textoDoTextView = view.findViewById<TextView>(R.id.txv_endereco).text
 

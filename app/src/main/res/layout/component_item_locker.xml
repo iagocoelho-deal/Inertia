@@ -5,7 +5,7 @@
     android:layout_height="wrap_content"
     android:background="@color/full_transparent"
     android:paddingVertical="6sp"
-    android:onClick="teste"
+    android:onClick="acessarEnderecoNoMapa"
    >
 
     <ImageView
