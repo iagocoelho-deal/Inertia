@@ -37,8 +37,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:layout_gravity="end"
-                android:padding="10sp"
-                android:onClick="handleAcessLocker">
+                android:padding="10sp">
 
                 <LinearLayout
                     android:layout_width="100sp"
@@ -49,6 +48,7 @@
                     android:layout_margin="15sp"
                     android:layout_weight="1"
                     android:orientation="vertical"
+                    android:onClick="handleAccessSearchLocker"
                     >
 
                     <ImageView
