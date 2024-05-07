@@ -15,6 +15,9 @@
         android:theme="@style/Theme.Inertia"
         tools:targetApi="31">
         <activity
+            android:name=".SucessCreateLocker"
+            android:exported="false" />
+        <activity
             android:name=".SearchLocker"
             android:exported="false" />
 

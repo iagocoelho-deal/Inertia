@@ -1,10 +1,226 @@
 <?xml version="1.0" encoding="utf-8"?>
-<fragment xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:map="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/map"
-    android:name="com.google.android.gms.maps.SupportMapFragment"
+<LinearLayout xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MapLockerActivity">
-</fragment>
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:id="@+id/map_locker"
+    android:background="@color/background_gray">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/background_gray"
+        android:orientation="horizontal"
+        android:paddingTop="20sp">
+
+        <ImageView
+            android:id="@+id/back_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="16sp"
+            android:src="@drawable/back_icon"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="Alugue um Locker"
+            android:textColor="@color/white"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/back_image"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/full_transparent"
+        android:id="@+id/header_map"
+        android:paddingTop="20sp"
+        android:orientation="vertical">
+    </LinearLayout>
+
+    <androidx.fragment.app.FragmentContainerView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:map="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/map"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="match_parent"
+        android:layout_height="230sp"
+        android:paddingHorizontal="8sp"
+        tools:context=".MapLockerActivity">
+    </androidx.fragment.app.FragmentContainerView>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingHorizontal="6sp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rounded_bottom_corner"
+            android:paddingHorizontal="16sp"
+
+            android:paddingBottom="18sp">
+
+
+            <TextView
+                android:id="@+id/info_importantes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:textStyle="bold"
+                android:text="Informações importantes:"
+                android:textColor="@color/white"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/ic_width"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:src="@drawable/width_icon"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/info_importantes" />
+
+            <TextView
+                android:id="@+id/txv_largura"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:text="Largura: 1,00m"
+                android:textColor="@color/white"
+                app:layout_constraintStart_toEndOf="@id/ic_width"
+                app:layout_constraintTop_toBottomOf="@id/info_importantes" />
+
+            <ImageView
+                android:id="@+id/ic_padlock"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:src="@drawable/padlock_icon"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@id/txv_largura"
+                app:layout_constraintTop_toBottomOf="@id/info_importantes" />
+
+            <TextView
+                android:id="@+id/txv_padlock"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:text="Cadeado Smart: Sim"
+                android:textColor="@color/white"
+                app:layout_constraintStart_toEndOf="@id/ic_padlock"
+                app:layout_constraintTop_toTopOf="@id/ic_padlock" />
+
+            <ImageView
+                android:id="@+id/ic_height"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="15dp"
+                android:src="@drawable/height_icon"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/ic_width" />
+
+            <TextView
+                android:id="@+id/txv_height"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:text="Altura: 1,00m"
+                android:textColor="@color/white"
+                app:layout_constraintStart_toEndOf="@id/ic_height"
+                app:layout_constraintTop_toBottomOf="@id/txv_largura" />
+
+            <ImageView
+                android:id="@+id/ic_shield"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:src="@drawable/shield_icon"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@id/txv_largura"
+                app:layout_constraintTop_toBottomOf="@id/ic_padlock" />
+
+            <TextView
+                android:id="@+id/txv_shield"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:text="Seguro: Sim"
+                android:textColor="@color/white"
+                app:layout_constraintStart_toEndOf="@id/ic_padlock"
+                app:layout_constraintTop_toTopOf="@id/ic_shield" />
+
+            <TextView
+                android:id="@+id/txv_armario"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:paddingHorizontal="10sp"
+                android:paddingTop="8sp"
+                android:text="Armário 100% Seguro, chaves individuais com desbloqueio via QR Code."
+                android:textColor="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/txv_desbloquear"
+                app:layout_constraintTop_toBottomOf="@id/ic_height" />
+
+            <TextView
+                android:id="@+id/txv_desbloquear"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="14dp"
+                android:text="Para desbloquear basta chegar no local, apontar o QR Coide no seu celular para o leitor no cadeado e guardar seus pertences :)"
+                android:textColor="@color/white"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/txv_armario" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="14dp"
+                android:text="Seguro 100% incluso."
+                android:textColor="@color/white"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/txv_desbloquear" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="20sp">
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:backgroundTint="@color/greenLight"
+                android:text="Alugar"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:paddingVertical="10sp"
+                android:layout_marginHorizontal="30sp"
+                android:textColor="@color/black"
+                android:onClick="handleAccessSuccessLocker"
+                />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>
+
+

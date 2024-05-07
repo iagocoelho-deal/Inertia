@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/menu"
-    android:background="#6D000000"
+    android:background="@color/background_gray"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <ScrollView

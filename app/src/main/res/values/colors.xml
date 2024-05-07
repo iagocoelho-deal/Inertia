@@ -5,4 +5,5 @@
     <color name="transparent">#7C000000</color>
     <color name="greenLight">#96FC7D</color>
     <color name="full_transparent">#00000000</color>
+    <color name="background_gray">#ABA8A3</color>
 </resources>

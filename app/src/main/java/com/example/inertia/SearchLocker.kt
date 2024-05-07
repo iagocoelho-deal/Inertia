@@ -56,6 +56,4 @@ class SearchLocker : AppCompatActivity() {
 
         startActivity(intent)
     }
-
-
 }

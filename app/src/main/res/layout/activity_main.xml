@@ -1,4 +1,4 @@
-<FrameLayout
+    <FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -76,17 +76,18 @@
                 android:textColorHint="@color/white"
                 android:textSize="24sp" />
 
-
             <Button
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:layout_marginBottom="32dp"
-                android:background="@color/greenLight"
-                android:paddingHorizontal="32sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/greenLight"
                 android:text="Login"
-                android:textSize="24sp"
-                android:onClick="handleLogin"/>
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:layout_marginBottom="34sp"
+                android:paddingVertical="10sp"
+                android:textColor="@color/black"
+                android:onClick="handleLogin"
+                />
 
 
             <TextView

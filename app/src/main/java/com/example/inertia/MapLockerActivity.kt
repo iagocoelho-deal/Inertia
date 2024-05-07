@@ -1,5 +1,6 @@
 package com.example.inertia
 
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.Typeface
 import androidx.appcompat.app.AppCompatActivity
@@ -29,12 +30,19 @@ class MapLockerActivity : AppCompatActivity(), OnMapReadyCallback    {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+
+        val textoRecebido = intent.getStringExtra("endereco") ?: ""
+
+
         binding = ActivityMapLockerBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         val mapFragment = supportFragmentManager
             .findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
+
+
+        adicionarTextViewNoMap(textoRecebido)
     }
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
@@ -111,4 +119,19 @@ class MapLockerActivity : AppCompatActivity(), OnMapReadyCallback    {
 
     }
 
+
+    private fun adicionarTextViewNoMap(endereco: String) {
+        val componenteLocker = layoutInflater.inflate(R.layout.activity_map_header, null)
+
+        componenteLocker.findViewById<TextView>(R.id.text_map_address)?.text = endereco
+
+        // Adicionar o componente ao layout principal
+        val layoutPrincipal = findViewById<LinearLayout>(R.id.header_map)
+        layoutPrincipal.addView(componenteLocker)
+    }
+
+    fun handleAccessSuccessLocker(view: View) {
+        val intent = Intent(this, SucessCreateLocker::class.java)
+        startActivity(intent)
+    }
 }

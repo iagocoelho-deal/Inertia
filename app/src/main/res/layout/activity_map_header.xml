@@ -4,15 +4,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto" android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/full_transparent"
-    android:paddingVertical="6sp"
+    android:paddingTop="6sp"
     android:paddingHorizontal="8sp"
-    android:onClick="acessarEnderecoNoMapa"
-   >
+    android:id="@+id/map_header"
+    >
 
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="65dp"
-        android:src="@drawable/rounded_corner_small"
+        android:src="@drawable/corner_top_small"
         app:layout_constraintTop_toTopOf="parent"
         android:contentDescription="Icone Lockers"
         android:id="@+id/corner_locker" />
@@ -30,22 +30,14 @@
 
 
     <TextView
-        android:id="@+id/txv_endereco"
+        android:id="@+id/text_map_address"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toEndOf="@id/ic_locker"
         app:layout_constraintTop_toTopOf="@id/corner_locker"
         app:layout_constraintBottom_toBottomOf="@id/corner_locker"
         android:layout_marginStart="20dp"
-        android:text="Av. Sapopemba, 415 - Vila Reg. Feijó"
+        android:text="Teste"
         android:textColor="@color/white"
         />
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/baseline_arrow_drop_down_24"
-        app:layout_constraintEnd_toEndOf="@id/corner_locker"
-        app:layout_constraintTop_toTopOf="@id/corner_locker"
-        app:layout_constraintBottom_toBottomOf="@id/corner_locker"
-        android:layout_marginRight="25dp"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
