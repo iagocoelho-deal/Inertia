@@ -18,11 +18,12 @@ class MainActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-
     }
 
     fun handleLogin(view: View) {
         val intent = Intent(this, Menu::class.java)
         startActivity(intent)
     }
+
 }
+

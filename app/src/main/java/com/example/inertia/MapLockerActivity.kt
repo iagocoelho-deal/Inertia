@@ -3,24 +3,28 @@ package com.example.inertia
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.Typeface
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.PersistableBundle
 import android.util.Log
 import android.view.Gravity
 import android.view.View
+import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.TextView
-
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import com.example.inertia.databinding.ActivityMapLockerBinding
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
-import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.MarkerOptions
-import com.example.inertia.databinding.ActivityMapLockerBinding
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
+import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
+import com.google.android.gms.maps.model.MarkerOptions
+import com.google.gson.Gson
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class MapLockerActivity : AppCompatActivity(), OnMapReadyCallback    {
 
@@ -43,7 +47,39 @@ class MapLockerActivity : AppCompatActivity(), OnMapReadyCallback    {
 
 
         adicionarTextViewNoMap(textoRecebido)
+
+
+        val btnAlugar: Button = findViewById(R.id.btn_alugar)
+
+        btnAlugar.setOnClickListener {
+
+            val lockerSharedPersist = this.getSharedPreferences("locker_shared", MODE_PRIVATE)
+            val locker_endereco = lockerSharedPersist.getString("locker_address","")
+
+
+            val lockerData = RentLockerRequestDTO(
+                locker_id = "d89a690d-e6cf-45b7-a34b-1d92c3c2f902",
+                user_id = 1
+            )
+
+            val call = RetrofitFactory().retrofitService().rentLocker(lockerData)
+
+            call.enqueue(object : Callback<RentLockerDTO> {
+
+                override fun onResponse(call: Call<RentLockerDTO>, response: Response<RentLockerDTO>) {
+
+                    response.let {
+                        Log.i("TESTE-Response", Gson().toJson(response.body()))
+                    }
+                }
+
+                override fun onFailure(call: Call<RentLockerDTO>?, t: Throwable?) {
+                    t?.message?.let { it1 -> Log.e("Erro", it1) }
+                }
+            })
+        }
     }
+
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
 
@@ -66,6 +102,9 @@ class MapLockerActivity : AppCompatActivity(), OnMapReadyCallback    {
             "Av Lins de Vasconcelos, 1264" -> LatLong = fiapVilaMariana
             else -> LatLong = fiapPaulista
         }
+
+
+        saveOnSharedPreference("locker_address", textoRecebido)
 
         mMap.addMarker(MarkerOptions()
             .position(fiapVilaOlimpia)
@@ -128,6 +167,16 @@ class MapLockerActivity : AppCompatActivity(), OnMapReadyCallback    {
         // Adicionar o componente ao layout principal
         val layoutPrincipal = findViewById<LinearLayout>(R.id.header_map)
         layoutPrincipal.addView(componenteLocker)
+    }
+
+
+    private fun saveOnSharedPreference(key: String, value: String) {
+        val lockerSharedPref = this.getSharedPreferences("locker_shared", MODE_PRIVATE)
+        val edit = lockerSharedPref.edit()
+
+        edit.putString(key, value).apply()
+
+        Toast.makeText(this, "Salvo com sucesso!", Toast.LENGTH_SHORT).show()
     }
 
     fun handleAccessSuccessLocker(view: View) {

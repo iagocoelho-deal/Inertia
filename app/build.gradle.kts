@@ -37,6 +37,7 @@ android {
     buildFeatures {
         viewBinding = true
     }
+    buildToolsVersion = "34.0.0"
 }
 
 dependencies {
@@ -46,6 +47,14 @@ dependencies {
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
     implementation(libs.play.services.maps.v1820)
+
+    // https://mvnrepository.com/artifact/com.squareup.retrofit2/retrofit
+    implementation("com.squareup.retrofit2:retrofit:2.9.0")
+
+    // https://mvnrepository.com/artifact/com.google.code.gson/gson
+    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
