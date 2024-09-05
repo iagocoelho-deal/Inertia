@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">Inertia</string>
     <string name="title_activity_map_locker">MapLockerActivity</string>
+    <string name="voltar">Voltar</string>
+    <string name="alugue_um_locker">Alugue um Locker</string>
+    <string name="icone_lockers">Icone Lockers</string>
 </resources>
