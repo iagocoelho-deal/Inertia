@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto" android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/full_transparent"
     android:paddingVertical="6sp"
     android:paddingHorizontal="8sp"
-    android:onClick="acessarEnderecoNoMapa"
    >
-
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="65dp"
         android:src="@drawable/rounded_corner_small"
         app:layout_constraintTop_toTopOf="parent"
-        android:contentDescription="Icone Lockers"
+        android:contentDescription="@string/icone_lockers"
         android:id="@+id/corner_locker" />
 
     <ImageView
@@ -25,7 +25,8 @@
         android:src="@drawable/ic_locker"
         app:layout_constraintStart_toStartOf="@id/corner_locker"
         app:layout_constraintTop_toTopOf="@id/corner_locker"
-        app:layout_constraintBottom_toBottomOf="@id/corner_locker" />
+        app:layout_constraintBottom_toBottomOf="@id/corner_locker"
+            android:contentDescription="@string/voltar" />
 
 
 
@@ -37,7 +38,7 @@
         app:layout_constraintTop_toTopOf="@id/corner_locker"
         app:layout_constraintBottom_toBottomOf="@id/corner_locker"
         android:layout_marginStart="20dp"
-        android:text="Av. Sapopemba, 415 - Vila Reg. Feijó"
+        android:text=""
         android:textColor="@color/white"
         />
     <ImageView
@@ -47,5 +48,7 @@
         app:layout_constraintEnd_toEndOf="@id/corner_locker"
         app:layout_constraintTop_toTopOf="@id/corner_locker"
         app:layout_constraintBottom_toBottomOf="@id/corner_locker"
-        android:layout_marginRight="25dp"/>
+        android:layout_marginEnd="25dp"
+            android:contentDescription="component"
+            tools:ignore="HardcodedText" />
 </androidx.constraintlayout.widget.ConstraintLayout>

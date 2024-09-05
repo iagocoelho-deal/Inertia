@@ -12,6 +12,9 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.inertia.DTO.RentLockerDTO
+import com.example.inertia.DTO.RentLockerRequestDTO
+import com.example.inertia.api.RetrofitFactory
 import com.example.inertia.databinding.ActivityMapLockerBinding
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -30,12 +33,18 @@ class MapLockerActivity : AppCompatActivity(), OnMapReadyCallback    {
 
     private lateinit var mMap: GoogleMap
     private lateinit var binding: ActivityMapLockerBinding
+    private var lockerId: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
 
-        val textoRecebido = intent.getStringExtra("endereco") ?: ""
+        val lockerEndereco = intent.getStringExtra("endereco") ?: ""
+        lockerId = intent.getStringExtra("lockerId")
+
+        // Verifique se os dados foram recuperados corretamente
+        Log.d("MapLockerActivity", "Endereço: $lockerEndereco")
+        Log.d("MapLockerActivity", "Locker ID: $lockerId")
 
 
         binding = ActivityMapLockerBinding.inflate(layoutInflater)
@@ -46,37 +55,46 @@ class MapLockerActivity : AppCompatActivity(), OnMapReadyCallback    {
         mapFragment.getMapAsync(this)
 
 
-        adicionarTextViewNoMap(textoRecebido)
+        adicionarTextViewNoMap(lockerEndereco)
 
 
         val btnAlugar: Button = findViewById(R.id.btn_alugar)
 
         btnAlugar.setOnClickListener {
+            val lockerData = lockerId?.let {
+                RentLockerRequestDTO(
+                    lockerId = lockerId!!,
+                    userId = 1,
+                    rentStartDate = "2024-09-05T10:00:00Z",
+                    rentFinishDate = "2024-09-10T10:00:00Z"
+                )
+            }
 
-            val lockerSharedPersist = this.getSharedPreferences("locker_shared", MODE_PRIVATE)
-            val locker_endereco = lockerSharedPersist.getString("locker_address","")
+            lockerData?.let { data ->
+                val call = RetrofitFactory().retrofitService().rentLocker(data)
 
+                Log.d("MapLockerActivity", "Objeto POST: $lockerData")
 
-            val lockerData = RentLockerRequestDTO(
-                locker_id = "d89a690d-e6cf-45b7-a34b-1d92c3c2f902",
-                user_id = 1
-            )
+                call.enqueue(object : Callback<RentLockerDTO> {
+                    override fun onResponse(call: Call<RentLockerDTO>, response: Response<RentLockerDTO>) {
+                        response.let {
+                            Log.i("TESTE-POST", Gson().toJson(response.body()))
 
-            val call = RetrofitFactory().retrofitService().rentLocker(lockerData)
+                            Toast.makeText(this@MapLockerActivity,
+                                "O locker foi alugado com sucesso!", Toast.LENGTH_LONG).show()
 
-            call.enqueue(object : Callback<RentLockerDTO> {
-
-                override fun onResponse(call: Call<RentLockerDTO>, response: Response<RentLockerDTO>) {
-
-                    response.let {
-                        Log.i("TESTE-Response", Gson().toJson(response.body()))
+                            handleAccessSuccessLocker()
+                        }
                     }
-                }
 
-                override fun onFailure(call: Call<RentLockerDTO>?, t: Throwable?) {
-                    t?.message?.let { it1 -> Log.e("Erro", it1) }
-                }
-            })
+                    override fun onFailure(call: Call<RentLockerDTO>, t: Throwable) {
+//                        t.message?.let { it1 -> Log.e("Erro", it1) }
+                        Toast.makeText(this@MapLockerActivity, "Ocorreu um erro ao alugar este locker", Toast.LENGTH_LONG).show()
+                    }
+                })
+            } ?: run {
+                Log.e("MapLockerActivity", "Locker ID não disponível")
+            }
         }
     }
 
@@ -179,7 +197,7 @@ class MapLockerActivity : AppCompatActivity(), OnMapReadyCallback    {
         Toast.makeText(this, "Salvo com sucesso!", Toast.LENGTH_SHORT).show()
     }
 
-    fun handleAccessSuccessLocker(view: View) {
+    fun handleAccessSuccessLocker() {
         val intent = Intent(this, SucessCreateLocker::class.java)
         startActivity(intent)
     }

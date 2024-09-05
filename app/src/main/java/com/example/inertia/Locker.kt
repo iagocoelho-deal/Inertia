@@ -1,3 +1,5 @@
 package com.example.inertia
 
-data class Locker(val Endereco: String)
+import java.util.UUID
+
+data class Locker(val Endereco: String, val uuid: UUID)

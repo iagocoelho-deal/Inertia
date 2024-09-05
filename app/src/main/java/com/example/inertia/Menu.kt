@@ -20,11 +20,6 @@ class Menu : AppCompatActivity() {
         }
     }
 
-    fun handleAcessLocker(view: View) {
-        val intent = Intent(this, MapLockerActivity::class.java)
-        startActivity(intent)
-    }
-
     fun handleAccessSearchLocker(view: View) {
         val intent = Intent(this, SearchLocker::class.java)
         startActivity(intent)

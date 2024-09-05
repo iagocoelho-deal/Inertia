@@ -1,4 +1,4 @@
-package com.example.inertia
+package com.example.inertia.api
 
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory

@@ -25,5 +25,9 @@ class MainActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
+
+    fun handleBackButtonClick(view: View) {
+        onBackPressedDispatcher.onBackPressed()
+    }
 }
 

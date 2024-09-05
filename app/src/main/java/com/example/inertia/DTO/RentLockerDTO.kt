@@ -1,4 +1,4 @@
-package com.example.inertia
+package com.example.inertia.DTO
 
 import java.util.Date
 
@@ -6,5 +6,6 @@ data class RentLockerDTO(
     val id: Number,
     val locker_id: String,
     val user_id: Number,
-    val rent_start_date: Date
+    val rentStartDate: Date,
+    val rentFinishDate: Date
 )

@@ -10,6 +10,12 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.example.inertia.DTO.GetLockersResponseDTO
+import com.example.inertia.api.RetrofitFactory
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import java.util.UUID
 
 class SearchLocker : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -22,37 +28,55 @@ class SearchLocker : AppCompatActivity() {
             insets
         }
 
-        val lockerList = listOf(
-            Locker("Rua Olimpíadas, 186"),
-            Locker("Av Paulista, 1106"),
-            Locker("Av Lins de Vasconcelos, 1264")
-        )
-        for (locker in lockerList) {
-            adicionarLockerAoLayout(locker)
-        }
+        val call = RetrofitFactory().retrofitService().getLockers()
 
+        call.enqueue(object : Callback<List<GetLockersResponseDTO>> {
+            override fun onResponse(call: Call<List<GetLockersResponseDTO>>, response: Response<List<GetLockersResponseDTO>>) {
+                if (response.isSuccessful) {
+                    response.body()?.let { lockerList ->
+                        for (locker in lockerList) {
+                            if (locker.free) {
+                                return adicionarLockerAoLayout(Locker(locker.address, locker.id))
+                            }
+                        }
+                    } ?: run {
+                        Log.e("TESTE-GET", "O corpo da resposta é nulo")
+                    }
+                } else {
+                    Log.e("TESTE-GET", "Erro na resposta: ${response.code()}")
+                }
+            }
+
+            override fun onFailure(call: Call<List<GetLockersResponseDTO>>, t: Throwable) {
+                Log.e("Erro", t.message ?: "Erro desconhecido")
+            }
+        })
     }
-
-
     private fun adicionarLockerAoLayout(locker: Locker) {
-        // Inflar o componente do locker
         val componenteLocker = layoutInflater.inflate(R.layout.component_item_locker, null)
 
-        // Configurar as informações do locker no componente
-        componenteLocker.findViewById<TextView>(R.id.txv_endereco).text = locker.Endereco
+        val enderecoTextView = componenteLocker.findViewById<TextView>(R.id.txv_endereco)
+        enderecoTextView.text = locker.Endereco
 
-        // Adicionar o componente ao layout principal
+        componenteLocker.setTag(R.id.txv_endereco, locker.uuid)
+
+        componenteLocker.setOnClickListener { view ->
+            val lockerId = view.getTag(R.id.txv_endereco) as UUID
+
+            acessarEnderecoNoMapa(view, lockerId)
+        }
+
         val layoutPrincipal = findViewById<LinearLayout>(R.id.search_locker)
         layoutPrincipal.addView(componenteLocker)
     }
 
-    fun acessarEnderecoNoMapa(view: View) {
-
+    private fun acessarEnderecoNoMapa(view: View, lockerId: UUID) {
         val textoDoTextView = view.findViewById<TextView>(R.id.txv_endereco).text
 
         val intent = Intent(this, MapLockerActivity::class.java)
 
         intent.putExtra("endereco", textoDoTextView)
+        intent.putExtra("lockerId", lockerId.toString())
 
         startActivity(intent)
     }
