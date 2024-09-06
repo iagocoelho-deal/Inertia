@@ -36,7 +36,7 @@ class SearchLocker : AppCompatActivity() {
                     response.body()?.let { lockerList ->
                         for (locker in lockerList) {
                             if (locker.free) {
-                                return adicionarLockerAoLayout(Locker(locker.address, locker.id))
+                                adicionarLockerAoLayout(Locker(locker.address, locker.id))
                             }
                         }
                     } ?: run {
