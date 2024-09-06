@@ -54,6 +54,7 @@
         android:textStyle="bold"
         app:backgroundTint="@color/greenLight"
         android:layout_marginTop="30sp"
+        android:onClick="handleGoToSearchLocker"
         app:layout_constraintTop_toBottomOf="@+id/txv_reservado"
         tools:layout_editor_absoluteX="30dp" />
 
